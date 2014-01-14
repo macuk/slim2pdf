@@ -1,4 +1,4 @@
-# Slim2pdf
+# Slim2pdf [![Code Climate](https://codeclimate.com/github/macuk/slim2pdf.png)](https://codeclimate.com/github/macuk/slim2pdf)
 
 Slim2pdf renders slim template with data hash and save the results as pdf file.
 
