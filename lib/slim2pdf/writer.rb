@@ -16,6 +16,13 @@ module Slim2pdf
       File.write(path, render_to_html)
     end
 
+    def save_to_pdf(path)
+      create_dir(path)
+      tmp_html = create_tmp_html
+      `wkhtmltopdf -q #{tmp_html.path} #{path}`
+      tmp_html.unlink
+    end
+
     private
       # Change hash data to scope object
       def scope
@@ -25,6 +32,16 @@ module Slim2pdf
       # Create dir if not exists
       def create_dir(path)
         FileUtils.mkdir_p(Pathname.new(path).dirname)
+      end
+
+      def create_tmp_html
+        tmp = Tempfile.new ['slim2pdf', '.html']
+        begin
+          tmp.write render_to_html
+        ensure
+          tmp.close
+        end
+        tmp
       end
   end
 end

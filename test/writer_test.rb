@@ -50,5 +50,13 @@ module Slim2pdf
       FileUtils.rm_rf('/tmp/a')
       assert_equal false, File.exists?('/tmp/a')
     end
+
+    def test_save_to_pdf
+      path = '/tmp/test.pdf'
+      @writer.save_to_pdf(path)
+      assert File.exists?(path)
+      File.unlink(path)
+      assert_equal false, File.exists?(path)
+    end
   end
 end
