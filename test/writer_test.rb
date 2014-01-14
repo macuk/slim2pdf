@@ -23,5 +23,14 @@ module Slim2pdf
       assert_equal '/tmp/tpl.slim', writer.template
       assert_equal @data, writer.data
     end
+
+    def test_render_to_html
+      data = {title: 'Slim2pdf', content: 'Slim to PDF conversion gem'}
+      template = File.expand_path('../tpl/test.slim', __FILE__)
+      writer = Writer.new(template, data)
+      html = writer.render_to_html
+      assert_match %r(<title>Slim2pdf</title>), html
+      assert_match %r(<p>Slim to PDF conversion gem</p>), html
+    end
   end
 end
