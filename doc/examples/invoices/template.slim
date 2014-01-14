@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Example Invoice
+  body
+    p
+      | Created at #{date}
+    h1
+      | Invoice nr #{number}
+    #content
+      h2
+        | Seller: #{seller}
+      h2
+        | Buyer: #{buyer}
+      p
+        | Item name: #{item_name}, price: #{price}

@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Slim2pdf::VERSION
   spec.authors       = ["Piotr Macuk"]
   spec.email         = ["piotr@macuk.pl"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Slim2pdf renders slim template with data hash and save the results as pdf file.}
+  spec.summary       = %q{Slim template to pdf file conversion tool.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
