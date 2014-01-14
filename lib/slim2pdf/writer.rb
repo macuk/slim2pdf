@@ -11,6 +11,10 @@ module Slim2pdf
       Slim::Template.new(template).render(scope)
     end
 
+    def save_to_html(path)
+      File.write(path, render_to_html)
+    end
+
     private
       # Change hash data to scope object
       def scope

@@ -32,5 +32,19 @@ module Slim2pdf
       assert_match %r(<title>Slim2pdf</title>), html
       assert_match %r(<p>Slim to PDF conversion gem</p>), html
     end
+
+    def test_save_to_html
+      data = {title: 'Slim2pdf', content: 'Slim to PDF conversion gem'}
+      template = File.expand_path('../tpl/test.slim', __FILE__)
+      writer = Writer.new(template, data)
+      path = '/tmp/test.html'
+      writer.save_to_html(path)
+      assert File.exists?(path)
+      html = File.read(path)
+      assert_match %r(<title>Slim2pdf</title>), html
+      assert_match %r(<p>Slim to PDF conversion gem</p>), html
+      File.unlink(path)
+      assert_equal false, File.exists?(path)
+    end
   end
 end
