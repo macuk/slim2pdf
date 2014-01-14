@@ -1,4 +1,6 @@
 require "slim2pdf/version"
 require "slim"
 require "ostruct"
+require "fileutils"
+require "pathname"
 require "slim2pdf/writer"

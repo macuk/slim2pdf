@@ -12,6 +12,7 @@ module Slim2pdf
     end
 
     def save_to_html(path)
+      create_dir(path)
       File.write(path, render_to_html)
     end
 
@@ -19,6 +20,11 @@ module Slim2pdf
       # Change hash data to scope object
       def scope
         OpenStruct.new(data)
+      end
+
+      # Create dir if not exists
+      def create_dir(path)
+        FileUtils.mkdir_p(Pathname.new(path).dirname)
       end
   end
 end

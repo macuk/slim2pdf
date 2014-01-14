@@ -46,5 +46,16 @@ module Slim2pdf
       File.unlink(path)
       assert_equal false, File.exists?(path)
     end
+
+    def test_save_to_html_with_dir_creation
+      template = File.expand_path('../tpl/test.slim', __FILE__)
+      writer = Writer.new(template)
+      path = '/tmp/a/b/c/test.html'
+      writer.save_to_html(path)
+      html = File.read(path)
+      assert_match %r(<html>), html
+      FileUtils.rm_rf('/tmp/a')
+      assert_equal false, File.exists?('/tmp/a')
+    end
   end
 end
