@@ -1,6 +1,7 @@
 module Slim2pdf
   class Writer
     attr_accessor :template, :data
+    attr_accessor :footer_text, :footer_font, :footer_font_size
 
     def initialize(template=nil, data={})
       @template = template
@@ -18,9 +19,13 @@ module Slim2pdf
 
     def save_to_pdf(path)
       create_dir(path)
-      tmp_html = create_tmp_html
-      `wkhtmltopdf -q #{tmp_html.path} #{path}`
-      tmp_html.unlink
+      html = create_tmp_html
+      `#{wkhtmltopdf_command(html.path, path)}`
+      html.unlink
+    end
+
+    def wkhtmltopdf_command(html_path, pdf_path)
+      "wkhtmltopdf #{footer_params} -q #{html_path} #{pdf_path}"
     end
 
     private
@@ -42,6 +47,12 @@ module Slim2pdf
           tmp.close
         end
         tmp
+      end
+
+      def footer_params
+        return unless footer_text
+        "--footer-line --footer-font-name '#{footer_font || 'verdana'}' " +
+        "--footer-font-size '#{footer_font_size || 10}' --footer-left '#{footer_text}'"
       end
   end
 end

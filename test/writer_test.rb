@@ -58,5 +58,18 @@ module Slim2pdf
       File.unlink(path)
       assert_equal false, File.exists?(path)
     end
+
+    def test_footer_params
+      @writer.footer_text = 'Footer'
+      command = @writer.wkhtmltopdf_command('tmp.html', 'out.pdf')
+      assert_match /Footer/, command
+      assert_match /10/, command
+      assert_match /verdana/, command
+      @writer.footer_font = 'arial'
+      @writer.footer_font_size = 14
+      command = @writer.wkhtmltopdf_command('tmp.html', 'out.pdf')
+      assert_match /14/, command
+      assert_match /arial/, command
+    end
   end
 end
