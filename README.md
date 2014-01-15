@@ -38,6 +38,13 @@ Or install it yourself as:
 
     writer.save_to_pdf(pdf_path) # saves rendered html as pdf file
 
+### Changing default wkhtmltopdf command
+
+    writer = Slim2pdf::Writer.new(template_path, data_hash)
+    writer.wkhtmltopdf_command = '/your/path/to/wkhtmltopdf --your --params'
+
+Input (html) and output (pdf) files will be added automatically.
+
 ## Examples
 
 ### Change slim template to pdf file (doc/examples/simple/).

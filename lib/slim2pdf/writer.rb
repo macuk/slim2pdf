@@ -1,6 +1,7 @@
 module Slim2pdf
   class Writer
     attr_accessor :template, :data
+    attr_accessor :wkhtmltopdf_command
     attr_accessor :footer_text, :footer_font, :footer_font_size
 
     def initialize(template=nil, data={})
@@ -20,12 +21,13 @@ module Slim2pdf
     def save_to_pdf(path)
       create_dir(path)
       html = create_tmp_html
-      `#{wkhtmltopdf_command(html.path, path)}`
+      `#{wkhtmltopdf_command} #{html.path} #{path}`
       html.unlink
     end
 
-    def wkhtmltopdf_command(html_path, pdf_path)
-      "wkhtmltopdf #{footer_params} -q #{html_path} #{pdf_path}"
+    # wkhtmltopdf command without html and pdf file params
+    def wkhtmltopdf_command
+      @wkhtmltopdf_command || "wkhtmltopdf #{footer_params} -q"
     end
 
     private

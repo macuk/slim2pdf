@@ -59,15 +59,22 @@ module Slim2pdf
       assert_equal false, File.exists?(path)
     end
 
+    def test_wkhtmltopdf_command
+      assert_match /wkhtmltopdf/, @writer.wkhtmltopdf_command
+      assert_match /-q/, @writer.wkhtmltopdf_command
+      @writer.wkhtmltopdf_command = 'test -a -b -c'
+      assert_equal 'test -a -b -c', @writer.wkhtmltopdf_command
+    end
+
     def test_footer_params
       @writer.footer_text = 'Footer'
-      command = @writer.wkhtmltopdf_command('tmp.html', 'out.pdf')
+      command = @writer.wkhtmltopdf_command
       assert_match /Footer/, command
       assert_match /10/, command
       assert_match /verdana/, command
       @writer.footer_font = 'arial'
       @writer.footer_font_size = 14
-      command = @writer.wkhtmltopdf_command('tmp.html', 'out.pdf')
+      command = @writer.wkhtmltopdf_command
       assert_match /14/, command
       assert_match /arial/, command
     end
