@@ -1,4 +1,6 @@
 require 'test_helper'
+require 'logger'
+require 'stringio'
 
 module Slim2pdf
   class WriterTest < MiniTest::Unit::TestCase
@@ -77,6 +79,25 @@ module Slim2pdf
       command = @writer.wkhtmltopdf_command
       assert_match /14/, command
       assert_match /arial/, command
+    end
+
+    def test_logger_accessor
+      assert_nil @writer.logger
+      stderr = Logger.new(STDERR)
+      @writer.logger = stderr
+      assert_equal stderr, @writer.logger
+    end
+
+    def test_logging
+      sio = StringIO.new
+      @writer.logger = Logger.new(sio)
+      @writer.logger.level = Logger::DEBUG
+      @writer.save_to_html('/tmp/out.html')
+      @writer.save_to_pdf('/tmp/out.pdf')
+      log = sio.string
+      assert_match %r(/tmp/out.html), log
+      assert_match %r(/tmp/out.pdf), log
+      assert_match /Run command: wkhtmltopdf/, log
     end
   end
 end

@@ -79,6 +79,17 @@ Input (html) and output (pdf) files will be added automatically.
       w.save_to_pdf("doc/examples/invoices/output-#{number}.pdf")
     end
 
+## Debuging
+
+### Setting logger
+
+    require 'logger'
+
+    writer = Slim2pdf::Writer.new(template_path, data_hash)
+    writer.logger = Logger.new(STDERR)
+
+If you use Slim2pdf with Rails, the Rails.logger will be set automatically.
+
 ## Contributing
 
 1. Fork it

@@ -3,6 +3,7 @@ module Slim2pdf
     attr_accessor :template, :data
     attr_accessor :wkhtmltopdf_command
     attr_accessor :footer_text, :footer_font, :footer_font_size
+    attr_accessor :logger
 
     def initialize(template=nil, data={})
       @template = template
@@ -16,18 +17,26 @@ module Slim2pdf
     def save_to_html(path)
       create_dir(path)
       File.write(path, render_to_html)
+      logger.info "[Slim2pdf] HTML file saved: #{path}" if logger
     end
 
     def save_to_pdf(path)
       create_dir(path)
       html = create_tmp_html
-      `#{wkhtmltopdf_command} #{html.path} #{path}`
+      full_command = "#{wkhtmltopdf_command} #{html.path} #{path}"
+      logger.debug "[Slim2pdf] Run command: #{full_command}" if logger
+      `#{full_command}`
       html.unlink
+      logger.info "[Slim2pdf] PDF file saved: #{path}" if logger
     end
 
     # wkhtmltopdf command without html and pdf file params
     def wkhtmltopdf_command
       @wkhtmltopdf_command || "wkhtmltopdf #{footer_params} -q"
+    end
+
+    def logger
+      @logger ||= defined?(Rails) ? Rails.logger : nil
     end
 
     private
