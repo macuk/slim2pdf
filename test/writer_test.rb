@@ -93,7 +93,9 @@ module Slim2pdf
       @writer.logger = Logger.new(sio)
       @writer.logger.level = Logger::DEBUG
       @writer.save_to_html('/tmp/out.html')
+      File.unlink('/tmp/out.html')
       @writer.save_to_pdf('/tmp/out.pdf')
+      File.unlink('/tmp/out.pdf')
       log = sio.string
       assert_match %r(/tmp/out.html), log
       assert_match %r(/tmp/out.pdf), log
