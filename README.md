@@ -1,4 +1,4 @@
-# Slim2pdf [![Code Climate](https://codeclimate.com/github/macuk/slim2pdf.png)](https://codeclimate.com/github/macuk/slim2pdf)
+# Slim2pdf [![Code Climate](https://codeclimate.com/github/macuk/slim2pdf.png)](https://codeclimate.com/github/macuk/slim2pdf) [![Build Status](https://travis-ci.org/macuk/slim2pdf.png?branch=master)](https://travis-ci.org/macuk/slim2pdf)
 
 Slim2pdf renders [slim template](http://slim-lang.com/) with data hash and saves the results as pdf file.
 
