@@ -46,11 +46,20 @@ writer.save_to_html('output.html') # saves rendered html to file
 writer.save_to_pdf('output.pdf') # saves rendered html as pdf file
 ```
 
-### Changing default wkhtmltopdf command
+### Changing default wkhtmltopdf path
 
 ```ruby
 writer = Slim2pdf::Writer.new
-writer.wkhtmltopdf_command = '/your/path/to/wkhtmltopdf --your --params'
+writer.wkhtmltopdf_path = '/your/path/to/wkhtmltopdf'
+```
+
+Wkhtmltopdf params will be generated automatically.
+
+### Changing default wkhtmltopdf command with params
+
+```ruby
+writer = Slim2pdf::Writer.new
+writer.wkhtmltopdf_command = '/bin/some_wrapper /your/path/to/wkhtmltopdf --your --params'
 ```
 
 Input (html) and output (pdf) files will be added automatically.

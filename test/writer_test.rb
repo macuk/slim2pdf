@@ -61,9 +61,14 @@ module Slim2pdf
       assert_equal false, File.exists?(path)
     end
 
+    def test_wkhtmltopdf_path
+      assert_equal 'wkhtmltopdf  -q', @writer.wkhtmltopdf_command
+      @writer.wkhtmltopdf_path = '/test/path/to/wkhtmltopdf'
+      assert_equal '/test/path/to/wkhtmltopdf  -q', @writer.wkhtmltopdf_command
+    end
+
     def test_wkhtmltopdf_command
-      assert_match /wkhtmltopdf/, @writer.wkhtmltopdf_command
-      assert_match /-q/, @writer.wkhtmltopdf_command
+      assert_equal 'wkhtmltopdf  -q', @writer.wkhtmltopdf_command
       @writer.wkhtmltopdf_command = 'test -a -b -c'
       assert_equal 'test -a -b -c', @writer.wkhtmltopdf_command
     end

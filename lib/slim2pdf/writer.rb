@@ -1,7 +1,7 @@
 module Slim2pdf
   class Writer
     attr_accessor :template, :data
-    attr_accessor :wkhtmltopdf_command
+    attr_accessor :wkhtmltopdf_path, :wkhtmltopdf_command
     attr_accessor :footer_text, :footer_font, :footer_font_size
     attr_accessor :logger
 
@@ -32,7 +32,8 @@ module Slim2pdf
 
     # wkhtmltopdf command without html and pdf file params
     def wkhtmltopdf_command
-      @wkhtmltopdf_command || "wkhtmltopdf #{footer_params} -q"
+      path = @wkhtmltopdf_path || 'wkhtmltopdf'
+      @wkhtmltopdf_command || "#{path} #{footer_params} -q"
     end
 
     def logger
