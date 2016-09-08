@@ -1,7 +1,7 @@
-require "slim2pdf/version"
-require "slim"
-require "ostruct"
-require "fileutils"
-require "pathname"
-require "tempfile"
-require "slim2pdf/writer"
+require 'slim2pdf/version'
+require 'slim'
+require 'ostruct'
+require 'fileutils'
+require 'pathname'
+require 'tempfile'
+require 'slim2pdf/writer'
