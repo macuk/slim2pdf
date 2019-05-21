@@ -41,6 +41,8 @@ module Slim2pdf
 
     def logger
       @logger ||= defined?(Rails) ? Rails.logger : nil
+    rescue NoMethodError
+      nil
     end
 
     private

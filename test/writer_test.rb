@@ -3,7 +3,7 @@ require 'logger'
 require 'stringio'
 
 module Slim2pdf
-  class WriterTest < MiniTest::Unit::TestCase
+  class WriterTest < Minitest::Test
     def setup
       @data = { title: 'Slim2pdf', content: 'Slim to PDF conversion gem' }
       @template = File.expand_path('../tpl/test.slim', __FILE__)
