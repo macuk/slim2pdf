@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "simplecov"
 
-  spec.add_dependency 'slim', '~> 4.0.1'
-  spec.add_dependency "wkhtmltopdf-binary", "0.12.3"
+  spec.add_dependency 'slim', '~> 4.0'
+  spec.add_dependency "wkhtmltopdf-binary", '~> 0.12'
 end
