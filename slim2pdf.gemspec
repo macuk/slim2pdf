@@ -24,5 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov"
 
   spec.add_dependency 'slim', '~> 4.0'
-  spec.add_dependency "wkhtmltopdf-binary", '0.12.5.4'
+  spec.add_dependency "wkhtmltopdf-binary", "0.12.3"
 end
